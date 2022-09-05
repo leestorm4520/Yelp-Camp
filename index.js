@@ -85,7 +85,7 @@ app.post('/campgrounds', validateCampground, wrapAsync(async (req,res,next)=>{
 //Show a specific camp
 app.get('/campgrounds/:id', wrapAsync(async (req,res,next)=>{
     const {id}=req.params;
-    const campground= await Campground.findById(id).populate('review');
+    const campground= await Campground.findById(id).populate('reviews');
     res.render('campgrounds/show',{campground});
 }))
 
@@ -114,10 +114,17 @@ app.delete('/campgrounds/:id',wrapAsync(async (req,res)=>{
 app.post('/campgrounds/:id/reviews', validateReview, wrapAsync(async(req,res,next)=>{
     const campground=await Campground.findById(req.params.id)
     const review= new Review(req.body.review);
-    campground.review.push(review);
+    campground.reviews.push(review);
     await review.save();
     await campground.save();
     res.redirect(`/campgrounds/${campground._id}`)
+}))
+
+app.delete('/campgrounds/:id/reviews/:reviewId', wrapAsync(async(req,res,next)=>{
+    const {id,reviewId}=req.params;
+    await Campground.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
+    await Review.findByIdAndDelete(req.params.reviewId);
+    res.redirect(`/campgrounds/${id}`);
 }))
 
 app.all('*', (req,res,next)=>{
