@@ -10,6 +10,7 @@ const ExpressError= require('./utils/ExpressError');
 const wrapAsync=require('./utils/wrapAsync');
 const Joi=require('joi');
 const {campgroundSchema}=require('./schemas');
+const Review=require('./models/review');
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp',{
     useNewUrlParser:true,
@@ -101,7 +102,12 @@ app.delete('/campgrounds/:id',wrapAsync(async (req,res)=>{
 }))
 
 app.post('/campgrounds/:id/reviews', wrapAsync(async(req,res,next)=>{
-    
+    const campground=await Campground.findById(req.params.id)
+    const review= new Review(req.body.review);
+    campground.review.push(review);
+    await review.save();
+    await campground.save();
+    res.redirect(`/campgrounds/${campground._id}`)
 }))
 
 app.all('*', (req,res,next)=>{
