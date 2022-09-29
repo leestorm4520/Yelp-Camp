@@ -31,7 +31,7 @@ module.exports.login = (req, res) => {
     res.redirect(redirectUrl);
 }
 
-module.exports.logout = (req, res) => {
+module.exports.logout = async (req, res) => {
     req.logout();
     // req.session.destroy();
     req.flash('success', "Goodbye!");

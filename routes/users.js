@@ -13,6 +13,11 @@ router.route('/login')
     .get(users.renderLogin)
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), users.login)
 
-router.get('/logout', users.logout)
+router.get('/logout', users.logout, (req, res)=>{
+    req.logout(req.user, err=>{
+        if(err) return next(err);
+        res.redirect("/");
+    })
+})
 
 module.exports = router;
