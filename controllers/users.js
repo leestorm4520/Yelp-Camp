@@ -31,9 +31,14 @@ module.exports.login = (req, res) => {
     res.redirect(redirectUrl);
 }
 
-module.exports.logout = async (req, res) => {
-    req.logout();
-    // req.session.destroy();
-    req.flash('success', "Goodbye!");
+module.exports.logout = async (req, res, next) => {
+    try{
+        req.logout();
+        // req.session.destroy();
+        req.flash('success', "Goodbye!");
+    }
+    catch(e){
+        req.flash('error', e.message);
+    }
     res.redirect('/campgrounds');
 }
