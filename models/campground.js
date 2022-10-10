@@ -1,3 +1,8 @@
+/**
+ * Campground model
+ *  design the schema for Campground class
+ */
+
 const mongoose = require('mongoose');
 const Review = require('./review')
 const Schema = mongoose.Schema;
@@ -10,6 +15,7 @@ const ImageSchema = new Schema({
     filename: String
 });
 
+// in the new campground for
 ImageSchema.virtual('thumbnail').get(function () {
     return this.url.replace('/upload', '/upload/w_200');
 });

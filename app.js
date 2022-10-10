@@ -1,3 +1,9 @@
+/**
+ * Index file - main operation and functionality of the website
+ */
+
+// if the process environment is not production, then require .env file
+// in VS code, the process environment is in development mode
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
@@ -13,7 +19,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
-const helmet = require('helmet');
+const helmet = require('helmet'); // secure Express.js by setting various HTTP headers
 const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
@@ -23,6 +29,7 @@ const MongoDBStore = require("connect-mongo")(session);
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 
+// connect with mongoose database server
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -60,6 +67,7 @@ store.on("error", function (e) {
     console.log("SESSION STORE ERROR", e)
 })
 
+// configure session
 const sessionConfig = {
     store,
     name: 'session',

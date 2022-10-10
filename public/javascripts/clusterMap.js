@@ -1,3 +1,7 @@
+/**
+ * Map display manipulation
+ */
+
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
     container: 'cluster-map',

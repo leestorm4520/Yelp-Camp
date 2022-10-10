@@ -1,3 +1,8 @@
+/**
+ * Review Model
+ *  design the schema of Review class
+ */
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

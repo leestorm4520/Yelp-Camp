@@ -1,3 +1,7 @@
+/**
+ * Bootstrap function to validate user input for form
+ */
+
 (function () {
     'use strict'
 

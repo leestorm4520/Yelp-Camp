@@ -1,3 +1,7 @@
+/**
+ * Info displayed when clicking a geopoint on the map
+ */
+
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
     container: 'map',
