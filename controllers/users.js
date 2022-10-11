@@ -45,9 +45,12 @@ module.exports.login = (req, res) => {
 }
 
 // logout
-module.exports.logout = async (req, res) => {
-    req.logout();
-    // req.session.destroy();
+module.exports.logout = async (req, res, next) => {
+    console.log("inside logout of user controller")
+    req.logout(err=>{
+        if(err)
+         return next(err);
+    });
     req.flash('success', "Goodbye!");
-    res.redirect('/campgrounds');
+    res.redirect('/');
 }

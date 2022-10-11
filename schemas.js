@@ -1,3 +1,7 @@
+/**
+ * Input validation for the database
+ * Adding a security layer for schema using JOI
+ */
 const BaseJoi = require('joi');
 const sanitizeHtml = require('sanitize-html');
 

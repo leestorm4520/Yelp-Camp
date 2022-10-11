@@ -74,6 +74,7 @@ const sessionConfig = {
     secret,
     resave: false,
     saveUninitialized: true,
+    //saveUnitialized:false,
     cookie: {
         httpOnly: true,
         // secure: true,
@@ -158,7 +159,7 @@ app.get('/', (req, res) => {
 
 
 app.all('*', (req, res, next) => {
-    next(new ExpressError('Page Not Found', 404))
+    next(new ExpressError('Page Not Found '+req.originalUrl, 404))
 })
 
 app.use((err, req, res, next) => {

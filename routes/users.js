@@ -13,20 +13,19 @@ router.route('/login')
     .get(users.renderLogin)
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), users.login)
 
-// router.post('/logout', users.logout, (req, res, next)=>{
-//     req.logout(req.user, err=>{
-//         if(err) return next(err);
-//         req.flash("success", "Successfully logged out");
-//         res.redirect("/");
-//     })
-// })
-router.post('/logout', (req, res, next)=>{
-    req.logout(err=>{
+
+router.get('/logout', (req, res, next)=>{
+    console.log("Inside logout of user routes")
+    req.logout(req.user, err=>{
         if(err) return next(err);
         req.flash("success", "Successfully logged out");
+        req.session.destroy();
         res.redirect("/");
     })
 })
 
+/**
+ * Reference link: https://stackoverflow.com/questions/13758207/why-is-passportjs-in-node-not-removing-session-on-logout
+ */
 
 module.exports = router;
