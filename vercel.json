@@ -1,3 +1,20 @@
 {
-    "rewrites": [{ "source": "/campgrounds/(.*)", "destination": "/campgrounds" }]
+    "version": 2,
+    "build": [
+        {
+            "src": "app.js",
+
+            "use": "8.19.3",
+        }
+    ],
+    "routes": [
+    {
+        "src": "/(.*)",
+        "dest": "app.js"
+    }
+    ]
   }
+
+//   {
+//     "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }]
+//   }

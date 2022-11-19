@@ -24,7 +24,6 @@ const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
-const { v4 } = require('uuid');
 
 const MongoDBStore = require("connect-mongo")(session);
 
@@ -158,19 +157,6 @@ app.get('/', (req, res) => {
     res.render('home')
 });
 
-app.get('/campgrounds', (req, res) => {
-  const path = `/campgrounds/item/${v4()}`;
-  res.setHeader('Content-Type', 'text/html');
-  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
-});
-
-app.get('/campgrounds/item/:slug', (req, res) => {
-  const { slug } = req.params;
-  res.end(`Item: ${slug}`);
-});
-
-
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found '+req.originalUrl, 404))
 })
@@ -185,5 +171,7 @@ const port = process.env.PORT || 3005;
 app.listen(port, () => {
     console.log(`Serving on port ${port}`)
 })
+
+module.exports = app;
 
 
