@@ -21,9 +21,9 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const helmet = require('helmet'); // secure Express.js by setting various HTTP headers
 const mongoSanitize = require('express-mongo-sanitize');
-const userRoutes = require('./routes/users');
-const campgroundRoutes = require('./routes/campgrounds');
-const reviewRoutes = require('./routes/reviews');
+const userRoutes = require('./api/users');
+const campgroundRoutes = require('./api/campgrounds');
+const reviewRoutes = require('./api/reviews');
 
 const MongoDBStore = require("connect-mongo")(session);
 

@@ -1,5 +1,5 @@
 /**
- * Campgrounds Route
+ * Campgrounds API
  */
 
 const express = require('express');

@@ -1,5 +1,5 @@
 /**
- * Reviews Route
+ * Reviews API
  */
 
 const express = require('express');
